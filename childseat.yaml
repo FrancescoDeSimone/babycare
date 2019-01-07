@@ -1,0 +1,30 @@
+metadata:
+  name: childseat
+  labels:
+    nuclio.io/project-name: bba0d152-4a73-4d97-94da-c821530cbc9b
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  image: "nuclio/processor-childseat:latest"
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPU: 75
+  triggers:
+    seat:
+      class: ""
+      kind: mqtt
+      url: "guest:guest@192.168.1.111:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: babycare/childseat
+  build:
+    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliL2NhbGxiYWNrX2FwaScpOw0KDQpmdW5jdGlvbiBsb2dnZXIobXNnKSB7DQogICAgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTkyLjE2OC4xLjExMTo1NjcyJywgKGVyciwgY29ubikgPT4gew0KICAgICAgICBjb25uLmNyZWF0ZUNoYW5uZWwoKGVyciwgY2gpID0+IHsNCiAgICAgICAgICAgIHZhciBleCA9ICdiYWJ5Y2FyZS9sb2dnZXInOw0KICAgICAgICAgICAgdmFyIGFyZ3MgPSBwcm9jZXNzLmFyZ3Yuc2xpY2UoMik7DQogICAgICAgICAgICB2YXIgc2V2ZXJpdHkgPSAiY2hpbGRzZWF0Ig0KICAgICAgICAgICAgY2guYXNzZXJ0RXhjaGFuZ2UoZXgsICdkaXJlY3QnLCB7IGR1cmFibGU6IGZhbHNlIH0pOw0KICAgICAgICAgICAgY2gucHVibGlzaChleCwgc2V2ZXJpdHksIG5ldyBCdWZmZXIuZnJvbShtc2cpKTsNCiAgICAgICAgfSk7DQogICAgICAgIHNldFRpbWVvdXQoKCkgPT4geyBjb25uLmNsb3NlKCk7fSwgNTAwKTsNCiAgICB9KTsNCn0NCg0KZXhwb3J0cy5oYW5kbGVyID0gZnVuY3Rpb24gKGNvbnRleHQsIGV2ZW50KSB7DQogICAgdmFyIF9ldmVudCA9IEpTT04ucGFyc2UoSlNPTi5zdHJpbmdpZnkoZXZlbnQpKTsNCiAgICB2YXIgX2RhdGEgPSAoX2V2ZW50LmJvZHkuZGF0YSk7DQogICAgY29udGV4dC5jYWxsYmFjaygiZmVlZGJhY2t0ICIgKyBfZGF0YSk7DQoNCiAgICBsb2dnZXIoX2RhdGEpOw0KfTsNCg==
+    commands:
+      - 'npm install amqplib'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+  platform: {}
+  version: 1
