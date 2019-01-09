@@ -33,7 +33,11 @@ function send_message(message) {
 
 
 setInterval(()=>{
-	let hearth=Math.random()*20+80
+	let hearth=Math.random()*40+50
 	let temp= Math.random()*4+36
+	if (temp >= 37 || hearth<=60){
+	  	send_message({warning:"critical condition",hearth:hearth,temp:temp})	
+	}else{
 	send_message({hearth:hearth,temp:temp})
-	},5000);
+	}},5000);
+	
