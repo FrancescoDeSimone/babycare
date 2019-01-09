@@ -1,7 +1,7 @@
 metadata:
   name: childseat
   labels:
-    nuclio.io/project-name: bba0d152-4a73-4d97-94da-c821530cbc9b
+    nuclio.io/project-name: fd1d6425-8737-4f9f-8a48-d673cc4981e5
 spec:
   handler: "main:handler"
   runtime: nodejs
@@ -11,20 +11,33 @@ spec:
   maxReplicas: 1
   targetCPU: 75
   triggers:
+    health:
+      class: ""
+      kind: mqtt
+      url: "guest:guest@10.0.2.15:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: babycare/health
     seat:
       class: ""
       kind: mqtt
-      url: "guest:guest@192.168.1.111:1883"
+      url: "guest:guest@10.0.2.15:1883"
       attributes:
         subscriptions:
           - qos: 0
             topic: babycare/childseat
   version: 1
   build:
-    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliJyk7DQoNCmFzeW5jIGZ1bmN0aW9uIGxvZ2dlcihtc2cpIHsNCiAgICBjb25zdCBjb25uID0gYXdhaXQgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTkyLjE2OC4xLjExMTo1NjcyJykNCiAgICBjb25zdCBjaGFubmVsID0gYXdhaXQgY29ubi5jcmVhdGVDaGFubmVsKCk7DQogICAgYXdhaXQgY2hhbm5lbC5hc3NlcnRFeGNoYW5nZSgnYmFieWNhcmUvbG9nZ2VyJywgJ2RpcmVjdCcsIHsgZHVyYWJsZTogZmFsc2UgfSk7DQogICAgYXdhaXQgY2hhbm5lbC5wdWJsaXNoKCJiYWJ5Y2FyZS9sb2dnZXIiLCAiY2hpbGRzZWF0IiwgbmV3IEJ1ZmZlci5mcm9tKG1zZykpOw0KICAgIGF3YWl0IGNoYW5uZWwuY2xvc2UoKTsNCiAgICBhd2FpdCBjb25uLmNsb3NlKCk7DQp9DQoNCmV4cG9ydHMuaGFuZGxlciA9IGZ1bmN0aW9uIChjb250ZXh0LCBldmVudCkgew0KICAgIHZhciBfZXZlbnQgPSBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KGV2ZW50KSk7DQogICAgdmFyIF9kYXRhID0gKF9ldmVudC5ib2R5LmRhdGEpOw0KICAgIGNvbnRleHQuY2FsbGJhY2soImZlZWRiYWNrdCAiICsgX2RhdGEpOw0KDQogICAgbG9nZ2VyKF9kYXRhKTsNCn07DQo=
-    commands:
-      - 'npm install amqplib'
+    image: ""
+    noCache: false
+    offline: false
+    dependencies: []
     runtimeAttributes:
       repositories: []
+    functionSourceCode: DQoNCnZhciBhbXFwID0gcmVxdWlyZSgnYW1xcGxpYicpOw0KDQphc3luYyBmdW5jdGlvbiBsb2dnZXIobXNnLHJvdXRpbmcpIHsNCiAgICBjb25zdCBjb25uID0gYXdhaXQgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTAuMC4yLjE1OjU2NzInKQ0KICAgIGNvbnN0IGNoYW5uZWwgPSBhd2FpdCBjb25uLmNyZWF0ZUNoYW5uZWwoKTsNCiAgICBhd2FpdCBjaGFubmVsLmFzc2VydEV4Y2hhbmdlKCdiYWJ5Y2FyZS9sb2dnZXInLCAnZGlyZWN0JywgeyBkdXJhYmxlOiBmYWxzZSB9KTsNCiAgICBhd2FpdCBjaGFubmVsLnB1Ymxpc2goImJhYnljYXJlL2xvZ2dlciIsIHJvdXRpbmcsIG5ldyBCdWZmZXIuZnJvbShtc2cpKTsNCiAgICBhd2FpdCBjaGFubmVsLmNsb3NlKCk7DQogICAgYXdhaXQgY29ubi5jbG9zZSgpOw0KfQ0KDQpleHBvcnRzLmhhbmRsZXIgPSBmdW5jdGlvbiAoY29udGV4dCwgZXZlbnQpIHsNCiAgICB2YXIgX2V2ZW50ID0gSlNPTi5wYXJzZShKU09OLnN0cmluZ2lmeShldmVudCkpOw0KICAgIHZhciBfZGF0YSA9IChfZXZlbnQuYm9keS5kYXRhKTsNCiAgICANCiAgICBsZXQgcm91dD1ldmVudC5oZWFkZXJzLlJlZmVyZXIuc3BsaXQoIi8iKTsNCiAgICBsZXQgbmFtZT1yb3V0W3JvdXQubGVuZ3RoLTJdLnRvU3RyaW5nKCk7DQogICAgY29udGV4dC5jYWxsYmFjayhuYW1lKTsNCiAgICBjb250ZXh0LmNhbGxiYWNrKCJmZWVkYmFja3QgIiArIF9kYXRhKTsNCg0KICAgIGxvZ2dlcihfZGF0YSxuYW1lKTsNCn07DQo=
+    commands:
+      - 'npm install amqplib'
     codeEntryType: sourceCode
   platform: {}
+  readinessTimeoutSeconds: 60

@@ -7,7 +7,7 @@ if (args.length == 0) {
     process.exit(1);
 }
 
-amqp.connect('amqp://guest:guest@192.168.1.111:5672', function (err, conn) {
+amqp.connect('amqp://guest:guest@10.0.2.15:5672', function (err, conn) {
     conn.createChannel(function (err, ch) {
         var ex = 'babycare/logger';
         ch.assertExchange(ex, 'direct', { durable: false });

@@ -24,34 +24,15 @@ function send_message(message) {
     console.log("Sent", message)
     const client = mqtt.connect("mqtt://" + mqtt_url.host, options)
     client.on('connect', function () {
-        client.publish("babycare/childseat", JSON.stringify(message), function () {
+        client.publish("babycare/health", JSON.stringify(message), function () {
             setTimeout(()=>client.end(),500);
         });
     	
     });
 }
 
-let door_lock = false
-let seat_occupy = false
-let warning = false
-process.stdin.on('keypress', (str, key) => {
 
-    if (key.ctrl && key.name === 'c')
-        process.exit()
-    else if (key.name === "space") {
-        door_lock = !door_lock
-        console.log("door is ", door_lock ? "close" : "open")
-    }
-    else if (key.name === "p") {
-        seat_occupy = !seat_occupy
-        console.log("seat is ", seat_occupy ? "occupy" : "free")
-    }
-    if (door_lock && seat_occupy) {
-        warning = true;
-        send_message({ warning: warning })
-    }
-    if (!door_lock && warning) {
-        warning = false
-        send_message({ warning: warning })
-    }
-})
+setInterval(()=>{
+	let hearth=Math.random()*20+80
+	send_message({hearth:hearth})
+	},5000);
