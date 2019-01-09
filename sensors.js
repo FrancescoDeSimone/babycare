@@ -1,39 +1,20 @@
 const argv = require('minimist')(process.argv.slice(2))
-if (argv.h) {
-    console.log("node sensors.js ip_address")
-    process.exit()
-}
-console.log(argv._[0])
-const mqtt = require('mqtt')
-const url = require('url')
+const mqtt = require("./mqttservice")
 const readline = require('readline')
-const mqtt_url = url.parse('mqtt://guest:guest@' + argv._[0] + ':1883')
-const auth = (mqtt_url.auth || ':').split(':')
-
-readline.emitKeypressEvents(process.stdin)
-process.stdin.setRawMode(true)
-
-const options = {
-    port: mqtt_url.port,
-    clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
-    username: auth[0],
-    password: auth[1],
-}
-
-function send_message(message) {
-    console.log("Sent", message)
-    const client = mqtt.connect("mqtt://" + mqtt_url.host, options)
-    client.on('connect', function () {
-        client.publish("babycare/childseat", JSON.stringify(message), function () {
-            setTimeout(()=>client.end(),500);
-        });
-    	
-    });
-}
 
 let door_lock = false
 let seat_occupy = false
 let warning = false
+
+readline.emitKeypressEvents(process.stdin)
+process.stdin.setRawMode(true)
+
+if (argv.h || argv._.length === 0) {
+    console.log("node sensors.js [ip_address]")
+    process.exit()
+}
+
+
 process.stdin.on('keypress', (str, key) => {
 
     if (key.ctrl && key.name === 'c')
@@ -47,11 +28,11 @@ process.stdin.on('keypress', (str, key) => {
         console.log("seat is ", seat_occupy ? "occupy" : "free")
     }
     if (door_lock && seat_occupy) {
-        warning = true;
-        send_message({ warning: warning })
+        warning = true
+        mqtt.send_message(argv._[0], { warning: true }, "babycare/childseat")
     }
-    if (!door_lock && warning) {
+    if (warning && !door_lock) {
         warning = false
-        send_message({ warning: warning })
+        mqtt.send_message(argv._[0], { warning: false }, "babycare/childseat")
     }
 })

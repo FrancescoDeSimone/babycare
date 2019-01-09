@@ -1,43 +1,18 @@
 const argv = require('minimist')(process.argv.slice(2))
-if (argv.h) {
-    console.log("node sensors.js ip_address")
+const mqtt = require("./mqttservice")
+
+if (argv.h || argv._.length === 0) {
+    console.log("node smart_watch.js [ip_address]")
     process.exit()
 }
-console.log(argv._[0])
-const mqtt = require('mqtt')
-const url = require('url')
-const readline = require('readline')
-const mqtt_url = url.parse('mqtt://guest:guest@' + argv._[0] + ':1883')
-const auth = (mqtt_url.auth || ':').split(':')
 
-readline.emitKeypressEvents(process.stdin)
-process.stdin.setRawMode(true)
+setInterval(() => {
+    let hearth = Math.random() * 40 + 50
+    let temp = Math.random() * 4 + 36
+    if (temp >= 37 || hearth <= 60) {
+        mqtt.send_message(argv._[0], { warning: true, hearth: hearth, temp: temp }, "babycare/health")
+    } else {
+        mqtt.send_message(argv._[0], { warning: false, hearth: hearth, temp: temp }, "babycare/health")
+    }
+}, 5000);
 
-const options = {
-    port: mqtt_url.port,
-    clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
-    username: auth[0],
-    password: auth[1],
-}
-
-function send_message(message) {
-    console.log("Sent", message)
-    const client = mqtt.connect("mqtt://" + mqtt_url.host, options)
-    client.on('connect', function () {
-        client.publish("babycare/health", JSON.stringify(message), function () {
-            setTimeout(()=>client.end(),500);
-        });
-    	
-    });
-}
-
-
-setInterval(()=>{
-	let hearth=Math.random()*40+50
-	let temp= Math.random()*4+36
-	if (temp >= 37 || hearth<=60){
-	  	send_message({warning:"critical condition",hearth:hearth,temp:temp})	
-	}else{
-	send_message({hearth:hearth,temp:temp})
-	}},5000);
-	
