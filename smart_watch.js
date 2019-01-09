@@ -34,5 +34,6 @@ function send_message(message) {
 
 setInterval(()=>{
 	let hearth=Math.random()*20+80
-	send_message({hearth:hearth})
+	let temp= Math.random()*4+36
+	send_message({hearth:hearth,temp:temp})
 	},5000);
