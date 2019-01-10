@@ -1,0 +1,50 @@
+metadata:
+  name: babycare
+  labels:
+    nuclio.io/project-name: 31fc2893-c023-4323-b91b-267a0c7c49bd
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPU: 75
+  triggers:
+    health:
+      kind: mqtt
+      attributes:
+        subscriptions:
+          - topic: babycare/health
+            qos: 0
+      workerAllocatorName: ""
+      url: "guest:guest@192.168.1.111:1883"
+    seat:
+      kind: mqtt
+      attributes:
+        subscriptions:
+          - topic: babycare/childseat
+            qos: 0
+      workerAllocatorName: ""
+      url: "guest:guest@192.168.1.111:1883"
+    position:
+      kind: mqtt
+      attributes:
+        subscriptions:
+          - topic: babycare/position
+            qos: 0
+      workerAllocatorName: ""
+      url: "guest:guest@192.168.1.111:1883"
+  version: 1
+  build:
+    image: ""
+    noCache: false
+    offline: false
+    dependencies: []
+    runtimeAttributes:
+      repositories: []
+    commands:
+      - 'npm install amqplib'
+    codeEntryType: sourceCode
+    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliJyk7DQoNCmFzeW5jIGZ1bmN0aW9uIGxvZ2dlcihtc2csIHJvdXRpbmcpIHsNCiAgICBjb25zdCBjb25uID0gYXdhaXQgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTkyLjE2OC4xLjExMTo1NjcyJykNCiAgICBjb25zdCBjaGFubmVsID0gYXdhaXQgY29ubi5jcmVhdGVDaGFubmVsKCkNCiAgICBhd2FpdCBjaGFubmVsLmFzc2VydEV4Y2hhbmdlKCdiYWJ5Y2FyZS9sb2dnZXInLCAnZGlyZWN0JywgeyBkdXJhYmxlOiBmYWxzZSB9KQ0KICAgIGF3YWl0IGNoYW5uZWwucHVibGlzaCgiYmFieWNhcmUvbG9nZ2VyIiwgcm91dGluZywgbmV3IEJ1ZmZlci5mcm9tKG1zZykpDQogICAgYXdhaXQgY2hhbm5lbC5jbG9zZSgpDQogICAgYXdhaXQgY29ubi5jbG9zZSgpDQp9DQoNCmV4cG9ydHMuaGFuZGxlciA9IGZ1bmN0aW9uIChjb250ZXh0LCBldmVudCkgew0KICAgIGNvbnN0IF9ldmVudCA9IEpTT04ucGFyc2UoSlNPTi5zdHJpbmdpZnkoZXZlbnQpKQ0KICAgIGNvbnN0IF9kYXRhID0gU3RyaW5nLmZyb21DaGFyQ29kZSguLi5fZXZlbnQuYm9keS5kYXRhKQ0KICAgIGNvbnN0IHJvdXRpbmcgPSBfZXZlbnQudXJsLnNwbGl0KCIvIilbMV0NCiAgICBsb2dnZXIoX2RhdGEsIHJvdXRpbmcpDQogICAgbG9nZ2VyKEpTT04uc3RyaW5naWZ5KF9ldmVudCksICJ0b3BpYyIpDQogICAgY29udGV4dC5jYWxsYmFjaygic2VuZCAiICsgX2RhdGEgKyAiIGluICIgKyByb3V0aW5nKQ0KfTsNCg==
+  platform: {}
+  readinessTimeoutSeconds: 60
