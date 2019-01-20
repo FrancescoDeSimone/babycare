@@ -14,7 +14,7 @@ spec:
     health:
       class: ""
       kind: mqtt
-      url: "guest:guest@192.168.1.111:1883"
+      url: "guest:guest@*IP*:1883"
       attributes:
         subscriptions:
           - qos: 0
@@ -22,19 +22,19 @@ spec:
     position:
       class: ""
       kind: mqtt
-      url: "guest:guest@192.168.1.111:1883"
+      url: "guest:guest@*IP*:1883"
       attributes:
         subscriptions:
           - qos: 0
             topic: babycare/position
     seat:
+      class: ""
       kind: mqtt
+      url: "guest:guest@*IP*:1883"
       attributes:
         subscriptions:
-          - topic: babycare/childseat
-            qos: 1
-      workerAllocatorName: ""
-      url: "guest:guest@192.168.1.111:1883"
+          - qos: 1
+            topic: babycare/childseat
   version: 1
   build:
     image: ""
@@ -43,9 +43,20 @@ spec:
     dependencies: []
     runtimeAttributes:
       repositories: []
-    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliJyk7DQoNCmFzeW5jIGZ1bmN0aW9uIGxvZ2dlcihtc2csIHJvdXRpbmcpIHsNCiAgICBjb25zdCBjb25uID0gYXdhaXQgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTkyLjE2OC4xLjExMTo1NjcyJykNCiAgICBjb25zdCBjaGFubmVsID0gYXdhaXQgY29ubi5jcmVhdGVDaGFubmVsKCkNCiAgICBhd2FpdCBjaGFubmVsLmFzc2VydEV4Y2hhbmdlKCdiYWJ5Y2FyZS9sb2dnZXInLCAnZGlyZWN0JywgeyBkdXJhYmxlOiBmYWxzZSB9KQ0KICAgIGF3YWl0IGNoYW5uZWwucHVibGlzaCgiYmFieWNhcmUvbG9nZ2VyIiwgcm91dGluZywgbmV3IEJ1ZmZlci5mcm9tKG1zZykpDQogICAgYXdhaXQgY2hhbm5lbC5jbG9zZSgpDQogICAgYXdhaXQgY29ubi5jbG9zZSgpDQp9DQoNCmV4cG9ydHMuaGFuZGxlciA9IGZ1bmN0aW9uIChjb250ZXh0LCBldmVudCkgew0KICAgIGNvbnN0IF9ldmVudCA9IEpTT04ucGFyc2UoSlNPTi5zdHJpbmdpZnkoZXZlbnQpKQ0KICAgIGNvbnN0IF9kYXRhID0gU3RyaW5nLmZyb21DaGFyQ29kZSguLi5fZXZlbnQuYm9keS5kYXRhKQ0KICAgIGNvbnN0IHJvdXRpbmcgPSBfZXZlbnQudXJsLnNwbGl0KCIvIilbMV0NCiAgICBsb2dnZXIoX2RhdGEsIHJvdXRpbmcpDQogICAgbG9nZ2VyKEpTT04uc3RyaW5naWZ5KF9ldmVudCksICJ0b3BpYyIpDQogICAgY29udGV4dC5jYWxsYmFjaygic2VuZCAiICsgX2RhdGEgKyAiIGluICIgKyByb3V0aW5nKQ0KfTsNCg==
+    functionSourceCode: Y29uc3QgYW1xcCA9IHJlcXVpcmUoJ2FtcXBsaWInKTsNCmNvbnN0IHJlcXVlc3QgPSByZXF1aXJlKCJyZXF1ZXN0LXByb21pc2UiKQ0KDQpjb25zdCBJUCA9IHByb2Nlc3MuZW52LklQOw0KY29uc3QgQVBJX0tFWV9JRlRUVCA9IHByb2Nlc3MuZW52LkFQSV9LRVlfSUZUVFQ7DQoNCmNvbnN0IG9wdGlvbnMgPSB7DQogICAgbWV0aG9kOiAnUE9TVCcsDQogICAgdXJpOiAnaHR0cHM6Ly9tYWtlci5pZnR0dC5jb20vdHJpZ2dlci9iYWJ5Y2FyZS93aXRoL2tleS8nK0FQSV9LRVlfSUZUVFQsDQogICAgYm9keTogeyB2YWx1ZTE6IDAsIHZhbHVlMjogMCB9LA0KICAgIGpzb246IHRydWUNCn07DQoNCmZ1bmN0aW9uIElGVFRtZXNzYWdlKHBvc2l0aW9uKSB7DQogICAgb3B0aW9ucy5ib2R5ID0geyB2YWx1ZTE6IHBvc2l0aW9uLmxvbmdpdHVkZSwgdmFsdWUyOiBwb3NpdGlvbi5sYXRpdHVkZSB9DQogICAgcmVxdWVzdChvcHRpb25zKQ0KICAgICAgICAudGhlbigoKSA9PiBsb2dnZXIoYFNlbnQgcG9zaXRpb24gJHtKU09OLnN0cmluZ2lmeShwb3NpdGlvbil9IHRvIHRlbGVncmFtYCwgIklGVFRUIikpDQogICAgICAgIC5jYXRjaCgoKSA9PiBsb2dnZXIoIkVycm9yIHNlbmRpbmcgbWVzc2FnZSIsICJJRlRUVCIpKQ0KDQp9DQoNCmFzeW5jIGZ1bmN0aW9uIGxvZ2dlcihtc2csIHJvdXRpbmcpIHsNCiAgICBjb25zdCBjb25uID0gYXdhaXQgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAJytJUCsnOjU2NzInKQ0KICAgIGNvbnN0IGNoYW5uZWwgPSBhd2FpdCBjb25uLmNyZWF0ZUNoYW5uZWwoKQ0KICAgIGF3YWl0IGNoYW5uZWwuYXNzZXJ0RXhjaGFuZ2UoJ2JhYnljYXJlL2xvZ2dlcicsICdkaXJlY3QnLCB7IGR1cmFibGU6IGZhbHNlIH0pDQogICAgYXdhaXQgY2hhbm5lbC5wdWJsaXNoKCJiYWJ5Y2FyZS9sb2dnZXIiLCByb3V0aW5nLCBuZXcgQnVmZmVyLmZyb20obXNnKSkNCiAgICBhd2FpdCBjaGFubmVsLmNsb3NlKCkNCiAgICBhd2FpdCBjb25uLmNsb3NlKCkNCn0NCg0KZXhwb3J0cy5oYW5kbGVyID0gZnVuY3Rpb24gKGNvbnRleHQsIGV2ZW50KSB7DQogICAgY29udGV4dC5sb2dnZXIuZGVidWcoZXZlbnQpDQogICAgY29uc3QgX2V2ZW50ID0gSlNPTi5wYXJzZShKU09OLnN0cmluZ2lmeShldmVudCkpDQogICAgY29uc3QgX2RhdGEgPSBTdHJpbmcuZnJvbUNoYXJDb2RlKC4uLl9ldmVudC5ib2R5LmRhdGEpDQogICAgY29uc3Qgcm91dGluZyA9IF9ldmVudC51cmwuc3BsaXQoIi8iKVsxXQ0KICAgIGlmIChyb3V0aW5nICE9PSB1bmRlZmluZWQpDQogICAgICAgIGxvZ2dlcihfZGF0YSwgcm91dGluZykNCiAgICBsb2dnZXIoSlNPTi5zdHJpbmdpZnkoX2V2ZW50KSwgInRvcGljIikNCg0KICAgIGlmICgicG9zaXRpb24iID09IHJvdXRpbmcpDQogICAgICAgIElGVFRtZXNzYWdlKEpTT04ucGFyc2UoX2RhdGEpKQ0KDQogICAgY29udGV4dC5jYWxsYmFjaygic2VuZCAiICsgX2RhdGEgKyAiIGluICIgKyByb3V0aW5nKQ0KfTsNCg==
     commands:
       - 'npm install amqplib'
+      - 'npm install request'
+      - 'npm install request-promise'
     codeEntryType: sourceCode
   platform: {}
   readinessTimeoutSeconds: 60
+  env:
+    - name: IP
+      value: *IP*
+    - name: API_KEY_IFTTT
+      value: *IFTTT*
+
+
+
+
