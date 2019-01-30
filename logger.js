@@ -2,7 +2,7 @@ const amqp = require('amqplib');
 const argv = require('minimist')(process.argv.slice(2))
 
 if (argv.h || argv.ip === undefined || argv._.length === 0) {
-    console.log("Usage: logger.js --ip [ip_address] [childseat] [health] [position] [topic]");
+    console.log("Usage: logger.js --ip [ip_address] [childseat] [health] [position] [topic] [IFTTT]");
     process.exit(1);
 }
 async function init() {

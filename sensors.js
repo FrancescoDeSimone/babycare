@@ -10,7 +10,7 @@ readline.emitKeypressEvents(process.stdin)
 process.stdin.setRawMode(true)
 
 if (argv.h || argv._.length === 0) {
-    console.log("node sensors.js [ip_address]")
+    console.log("Usage: node sensors.js [ip_address]")
     process.exit()
 }
 
